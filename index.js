@@ -9,8 +9,8 @@ const bot = new TelegramApi(token, { polling: true });
 const aztroJs = require('aztro-js');
 require('dotenv').config();
 
-const property = 'color';
-const day = 'today';
+// const property = 'color';
+// const day = 'today';
 
 bot.setMyCommands(
   [
