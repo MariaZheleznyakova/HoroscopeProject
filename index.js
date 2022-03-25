@@ -1,5 +1,6 @@
 // Подключаем библиотеку для создания бота
 const TelegramApi = require('node-telegram-bot-api');
+
 const translate = require('translate-google');
 // Создаём переменную для токина
 const token = '5196890539:AAGf8Fxc3jADv9RPNo7Wkzzdcn0ndx4b6DA';
@@ -14,6 +15,7 @@ bot.setMyCommands(
   [
     { command: '/start', description: 'Начало' },
     { command: '/info', description: 'Инфо' },
+    // { command: '/lol', description: 'lol btn' },
     { command: '/aries', description: 'Гороскоп для Овна' },
     { command: '/taurus', description: 'Гороскоп для Тельца' },
     { command: '/gemini', description: 'Гороскоп для Близнецов' },
@@ -26,6 +28,7 @@ bot.setMyCommands(
     { command: '/capricornus', description: 'Гороскоп для Козерога' },
     { command: '/aquarius', description: 'Гороскоп для Водолея' },
     { command: '/pisces', description: 'Гороскоп для Рыб' },
+
   ],
 );
 
@@ -36,8 +39,16 @@ bot.on('message', async (msg) => {
   if (text === '/start') {
     await bot.sendSticker(chatId, 'https://tlgrm.ru/_/stickers/f9d/8a4/f9d8a439-4d26-42e3-830d-6b6ba804c505/20.webp');
     await bot.sendMessage(chatId, `Привет, ${msg.from.first_name}! Как хорошо, что ты здесь❤️
-Хочешь узнать, что ждет тебя сегодня?`);
+Это чат-бот с твоим персональным гороскопом на сегодня`);
+    await bot.sendMessage(chatId, `Если хочешь узнать о программе подробнее - нажми ${'/info'}`);
+    await bot.sendMessage(chatId, `Или сразу переходи к гороскопу, выбрав свой знак зодиака
+
+${'/aries'}, ${'/taurus'}, ${'/gemini'}, ${'/cancer'}, ${'/leo'}, ${'/virgo'}, ${'/libra'}, ${'/scorpious'}, ${'/sagittarius'}, ${'/capricornus'}, ${'/aquarius'}, ${'/pisces'}`);
   }
+
+  // if (text === '/lol') {
+  //   await bot.KeyboardButton(chatId, 'весело');
+  // }
   if (text === '/info') {
     await bot.sendMessage(chatId, `Тебя зовут ${msg.from.first_name} ${msg.from.last_name}`);
   }
@@ -46,12 +57,20 @@ bot.on('message', async (msg) => {
     aztroJs.getTodaysHoroscope(sign, async (res) => {
       const result = res.description;
       const rere = res.color;
-      const timere = res.lucky_time;
+      // const timere = res.lucky_time;
       await bot.sendSticker(chatId, 'https://tlgrm.ru/_/stickers/531/156/53115640-37c0-4094-b971-21e3674a71c6/1.webp');
-      await bot.sendMessage(chatId, `⭐${result}. 
-
-🌈Сolor of the day: ${rere}
-🍀Lucky hour: ${timere}`);
+      translate(result, { to: 'ru' }).then(async (response) => {
+        const trResult = response;
+        await bot.sendMessage(chatId, `⭐${trResult}`);
+      });
+      translate(rere, { to: 'ru' }).then(async (response) => {
+        const trRere = response;
+        await bot.sendMessage(chatId, `🌈Цвет дня:${trRere}`);
+      });
+      // translate(timere, { to: 'ru' }).then(async (response) => {
+      //   const trTimere = response;
+      //   await bot.sendMessage(chatId, `🍀Час удачи:${trTimere}`);
+      // });
     });
   }
   if (text === '/taurus') {
@@ -59,12 +78,20 @@ bot.on('message', async (msg) => {
     aztroJs.getTodaysHoroscope(sign, async (res) => {
       const result = res.description;
       const rere = res.color;
-      const timere = res.lucky_time;
+      // const timere = res.lucky_time;
       await bot.sendSticker(chatId, 'https://tlgrm.ru/_/stickers/531/156/53115640-37c0-4094-b971-21e3674a71c6/2.webp');
-      await bot.sendMessage(chatId, `⭐${result}. 
-      
-🌈Сolor of the day: ${rere}
-🍀Lucky hour: ${timere}`);
+      translate(result, { to: 'ru' }).then(async (response) => {
+        const trResult = response;
+        await bot.sendMessage(chatId, `⭐${trResult}`);
+      });
+      translate(rere, { to: 'ru' }).then(async (response) => {
+        const trRere = response;
+        await bot.sendMessage(chatId, `🌈Цвет дня:${trRere}`);
+      });
+      // translate(timere, { to: 'ru' }).then(async (response) => {
+      //   const trTimere = response;
+      //   await bot.sendMessage(chatId, `🍀Час удачи:${trTimere}`);
+      // });
     });
   }
   if (text === '/gemini') {
@@ -72,12 +99,20 @@ bot.on('message', async (msg) => {
     aztroJs.getTodaysHoroscope(sign, async (res) => {
       const result = res.description;
       const rere = res.color;
-      const timere = res.lucky_time;
+      // const timere = res.lucky_time;
       await bot.sendSticker(chatId, 'https://tlgrm.ru/_/stickers/531/156/53115640-37c0-4094-b971-21e3674a71c6/3.webp');
-      await bot.sendMessage(chatId, `⭐${result}. 
-      
-🌈Сolor of the day: ${rere}
-🍀Lucky hour: ${timere}`);
+      translate(result, { to: 'ru' }).then(async (response) => {
+        const trResult = response;
+        await bot.sendMessage(chatId, `⭐${trResult}`);
+      });
+      translate(rere, { to: 'ru' }).then(async (response) => {
+        const trRere = response;
+        await bot.sendMessage(chatId, `🌈Цвет дня:${trRere}`);
+      });
+      // translate(timere, { to: 'ru' }).then(async (response) => {
+      //   const trTimere = response;
+      //   await bot.sendMessage(chatId, `🍀Час удачи:${trTimere}`);
+      // });
     });
   }
   if (text === '/cancer') {
@@ -85,12 +120,20 @@ bot.on('message', async (msg) => {
     aztroJs.getTodaysHoroscope(sign, async (res) => {
       const result = res.description;
       const rere = res.color;
-      const timere = res.lucky_time;
+      // const timere = res.lucky_time;
       await bot.sendSticker(chatId, 'https://tlgrm.ru/_/stickers/531/156/53115640-37c0-4094-b971-21e3674a71c6/4.webp');
-      await bot.sendMessage(chatId, `⭐${result}. 
-      
-🌈Сolor of the day: ${rere}
-🍀Lucky hour: ${timere}`);
+      translate(result, { to: 'ru' }).then(async (response) => {
+        const trResult = response;
+        await bot.sendMessage(chatId, `⭐${trResult}`);
+      });
+      translate(rere, { to: 'ru' }).then(async (response) => {
+        const trRere = response;
+        await bot.sendMessage(chatId, `🌈Цвет дня:${trRere}`);
+      });
+      // translate(timere, { to: 'ru' }).then(async (response) => {
+      //   const trTimere = response;
+      //   await bot.sendMessage(chatId, `🍀Час удачи:${trTimere}`);
+      // });
     });
   }
   if (text === '/leo') {
@@ -98,12 +141,20 @@ bot.on('message', async (msg) => {
     aztroJs.getTodaysHoroscope(sign, async (res) => {
       const result = res.description;
       const rere = res.color;
-      const timere = res.lucky_time;
+      // const timere = res.lucky_time;
       await bot.sendSticker(chatId, 'https://tlgrm.ru/_/stickers/531/156/53115640-37c0-4094-b971-21e3674a71c6/5.webp');
-      await bot.sendMessage(chatId, `⭐${result}. 
-      
-🌈Сolor of the day: ${rere}
-🍀Lucky hour: ${timere}`);
+      translate(result, { to: 'ru' }).then(async (response) => {
+        const trResult = response;
+        await bot.sendMessage(chatId, `⭐${trResult}`);
+      });
+      translate(rere, { to: 'ru' }).then(async (response) => {
+        const trRere = response;
+        await bot.sendMessage(chatId, `🌈Цвет дня:${trRere}`);
+      });
+      // translate(timere, { to: 'ru' }).then(async (response) => {
+      //   const trTimere = response;
+      //   await bot.sendMessage(chatId, `🍀Час удачи:${trTimere}`);
+      // });
     });
   }
   if (text === '/virgo') {
@@ -111,12 +162,20 @@ bot.on('message', async (msg) => {
     aztroJs.getTodaysHoroscope(sign, async (res) => {
       const result = res.description;
       const rere = res.color;
-      const timere = res.lucky_time;
+      // const timere = res.lucky_time;
       await bot.sendSticker(chatId, 'https://tlgrm.ru/_/stickers/531/156/53115640-37c0-4094-b971-21e3674a71c6/6.webp');
-      await bot.sendMessage(chatId, `⭐${result}. 
-      
-🌈Сolor of the day: ${rere}
-🍀Lucky hour: ${timere}`);
+      translate(result, { to: 'ru' }).then(async (response) => {
+        const trResult = response;
+        await bot.sendMessage(chatId, `⭐${trResult}`);
+      });
+      translate(rere, { to: 'ru' }).then(async (response) => {
+        const trRere = response;
+        await bot.sendMessage(chatId, `🌈Цвет дня:${trRere}`);
+      });
+      // translate(timere, { to: 'ru' }).then(async (response) => {
+      //   const trTimere = response;
+      //   await bot.sendMessage(chatId, `🍀Час удачи:${trTimere}`);
+      // });
     });
   }
   if (text === '/libra') {
@@ -124,12 +183,20 @@ bot.on('message', async (msg) => {
     aztroJs.getTodaysHoroscope(sign, async (res) => {
       const result = res.description;
       const rere = res.color;
-      const timere = res.lucky_time;
+      // const timere = res.lucky_time;
       await bot.sendSticker(chatId, 'https://tlgrm.ru/_/stickers/531/156/53115640-37c0-4094-b971-21e3674a71c6/7.webp');
-      await bot.sendMessage(chatId, `⭐${result}. 
-      
-🌈Сolor of the day: ${rere}
-🍀Lucky hour: ${timere}`);
+      translate(result, { to: 'ru' }).then(async (response) => {
+        const trResult = response;
+        await bot.sendMessage(chatId, `⭐${trResult}`);
+      });
+      translate(rere, { to: 'ru' }).then(async (response) => {
+        const trRere = response;
+        await bot.sendMessage(chatId, `🌈Цвет дня:${trRere}`);
+      });
+      // translate(timere, { to: 'ru' }).then(async (response) => {
+      //   const trTimere = response;
+      //   await bot.sendMessage(chatId, `🍀Час удачи:${trTimere}`);
+      // });
     });
   }
   if (text === '/scorpious') {
@@ -137,12 +204,20 @@ bot.on('message', async (msg) => {
     aztroJs.getTodaysHoroscope(sign, async (res) => {
       const result = res.description;
       const rere = res.color;
-      const timere = res.lucky_time;
+      // const timere = res.lucky_time;
       await bot.sendSticker(chatId, 'https://tlgrm.ru/_/stickers/531/156/53115640-37c0-4094-b971-21e3674a71c6/8.webp');
-      await bot.sendMessage(chatId, `⭐${result}. 
-      
-🌈Сolor of the day: ${rere}
-🍀Lucky hour: ${timere}`);
+      translate(result, { to: 'ru' }).then(async (response) => {
+        const trResult = response;
+        await bot.sendMessage(chatId, `⭐${trResult}`);
+      });
+      translate(rere, { to: 'ru' }).then(async (response) => {
+        const trRere = response;
+        await bot.sendMessage(chatId, `🌈Цвет дня:${trRere}`);
+      });
+      // translate(timere, { to: 'ru' }).then(async (response) => {
+      //   const trTimere = response;
+      //   await bot.sendMessage(chatId, `🍀Час удачи:${trTimere}`);
+      // });
     });
   }
   if (text === '/sagittarius') {
@@ -150,12 +225,20 @@ bot.on('message', async (msg) => {
     aztroJs.getTodaysHoroscope(sign, async (res) => {
       const result = res.description;
       const rere = res.color;
-      const timere = res.lucky_time;
+      // const timere = res.lucky_time;
       await bot.sendSticker(chatId, 'https://tlgrm.ru/_/stickers/531/156/53115640-37c0-4094-b971-21e3674a71c6/9.webp');
-      await bot.sendMessage(chatId, `⭐${result}. 
-      
-🌈Сolor of the day: ${rere}
-🍀Lucky hour: ${timere}`);
+      translate(result, { to: 'ru' }).then(async (response) => {
+        const trResult = response;
+        await bot.sendMessage(chatId, `⭐${trResult}`);
+      });
+      translate(rere, { to: 'ru' }).then(async (response) => {
+        const trRere = response;
+        await bot.sendMessage(chatId, `🌈Цвет дня:${trRere}`);
+      });
+      // translate(timere, { to: 'ru' }).then(async (response) => {
+      //   const trTimere = response;
+      //   await bot.sendMessage(chatId, `🍀Час удачи:${trTimere}`);
+      // });
     });
   }
   if (text === '/capricornus') {
@@ -163,12 +246,20 @@ bot.on('message', async (msg) => {
     aztroJs.getTodaysHoroscope(sign, async (res) => {
       const result = res.description;
       const rere = res.color;
-      const timere = res.lucky_time;
+      // const timere = res.lucky_time;
       await bot.sendSticker(chatId, 'https://tlgrm.ru/_/stickers/531/156/53115640-37c0-4094-b971-21e3674a71c6/10.webp');
-      await bot.sendMessage(chatId, `⭐${result}. 
-      
-🌈Сolor of the day: ${rere}
-🍀Lucky hour: ${timere}`);
+      translate(result, { to: 'ru' }).then(async (response) => {
+        const trResult = response;
+        await bot.sendMessage(chatId, `⭐${trResult}`);
+      });
+      translate(rere, { to: 'ru' }).then(async (response) => {
+        const trRere = response;
+        await bot.sendMessage(chatId, `🌈Цвет дня:${trRere}`);
+      });
+      // translate(timere, { to: 'ru' }).then(async (response) => {
+      //   const trTimere = response;
+      //   await bot.sendMessage(chatId, `🍀Час удачи:${trTimere}`);
+      // });
     });
   }
   if (text === '/aquarius') {
@@ -176,12 +267,20 @@ bot.on('message', async (msg) => {
     aztroJs.getTodaysHoroscope(sign, async (res) => {
       const result = res.description;
       const rere = res.color;
-      const timere = res.lucky_time;
+      // const timere = res.lucky_time;
       await bot.sendSticker(chatId, 'https://tlgrm.ru/_/stickers/531/156/53115640-37c0-4094-b971-21e3674a71c6/11.webp');
-      await bot.sendMessage(chatId, `⭐${result}. 
-      
-🌈Сolor of the day: ${rere}
-🍀Lucky hour: ${timere}`);
+      translate(result, { to: 'ru' }).then(async (response) => {
+        const trResult = response;
+        await bot.sendMessage(chatId, `⭐${trResult}`);
+      });
+      translate(rere, { to: 'ru' }).then(async (response) => {
+        const trRere = response;
+        await bot.sendMessage(chatId, `🌈Цвет дня:${trRere}`);
+      });
+      // translate(timere, { to: 'ru' }).then(async (response) => {
+      //   const trTimere = response;
+      //   await bot.sendMessage(chatId, `🍀Час удачи:${trTimere}`);
+      // });
     });
   }
   if (text === '/pisces') {
@@ -189,12 +288,20 @@ bot.on('message', async (msg) => {
     aztroJs.getTodaysHoroscope(sign, async (res) => {
       const result = res.description;
       const rere = res.color;
-      const timere = res.lucky_time;
+      // const timere = res.lucky_time;
       await bot.sendSticker(chatId, 'https://tlgrm.ru/_/stickers/531/156/53115640-37c0-4094-b971-21e3674a71c6/12.webp');
-      await bot.sendMessage(chatId, `⭐${result}. 
-      
-🌈Сolor of the day: ${rere}
-🍀Lucky hour: ${timere}`);
+      translate(result, { to: 'ru' }).then(async (response) => {
+        const trResult = response;
+        await bot.sendMessage(chatId, `⭐${trResult}`);
+      });
+      translate(rere, { to: 'ru' }).then(async (response) => {
+        const trRere = response;
+        await bot.sendMessage(chatId, `🌈Цвет дня:${trRere}`);
+      });
+      // translate(timere, { to: 'ru' }).then(async (response) => {
+      //   const trTimere = response;
+      //   await bot.sendMessage(chatId, `🍀Час удачи:${trTimere}`);
+      // });
     });
   }
 });
